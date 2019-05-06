@@ -1,0 +1,7 @@
+{
+  "name": "DCMovieRatings",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Incredible Movies DavClauds
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" appAutoHide>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!imdb.movies || imdb.movies.length == 0;" style="padding: 1em">
+    <img style="opacity: 0.7;padding: 4em 4em 1em 4em" src="/assets/images/no_movies.jpg">
+    <ion-text color="dark">
+      <h1 style="opacity: 0.7;text-align: center">
+        Bem vindo ao IMDC, a melhor app de filmes de sempre.
+      </h1>
+      <h2 style="opacity: 0.7;text-align: center">
+        Parece que ainda não adicionamos nenhum filme. Estamos à espera de quê mesmo?
+      </h2>
+    </ion-text>
+  </div>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center *ngFor="let movie of imdb.movies; index as i">
+      <ion-card style="max-width: 370px;">
+        <ion-grid style="padding: 0">
+          <ion-row>
+            <ion-col size="3" style="padding: 0">
+              <img height="100%" src="{{movie.imdb.Poster}}">
+            </ion-col>
+            <ion-col style="padding-bottom: 0; padding-left:0; padding-right:0; overflow: hidden;">
+              <ion-row>
+                <ion-col style="overflow: hidden; padding-bottom: 0">
+                  <ion-card-header style="padding:0.3em">
+                    <div style="display: flex; justify-content: space-between">
+                      <ion-card-title style="font-size: 17px;">#{{i+1}}</ion-card-title>
+                      <ion-card-subtitle>ClaudsMeter: {{movie.claudsmeter}}</ion-card-subtitle>
+                    </div>
+                    <ion-card-title style="margin:0; width:inherit; font-size: 18px; text-overflow: ellipsis; overflow:hidden; white-space:nowrap">{{movie.imdb.Title}}</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content style="padding-left:0.3em;padding-bottom: 0;text-overflow: ellipsis; overflow:hidden;">
+                    <p style="height: 3em; width:inherit; display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">Visto no dia {{imdb.printDate(movie.date_seen)}} {{movie.where}}</p>
+                  </ion-card-content>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col align-self-end style="display:flex; padding-bottom: 0; padding-top:0; justify-content: space-between;">
+                  <ion-chip style="margin:0 0 3px 0; width:88.0px;" *ngIf="getRatingFromSource(movie.imdb.Ratings,'Internet Movie Database'); let rating"
+                    (click)="openIMDB(movie.imdbID)">
+                    <ion-avatar>
+                      <img src="/assets/images/imdb.png">
+                    </ion-avatar>
+                    <ion-label>{{rating}}</ion-label>
+                  </ion-chip>
+                  <ion-chip style="margin:0 0 3px 0; width:75.5px;" *ngIf="getRatingFromSource(movie.imdb.Ratings,'Rotten Tomatoes'); let rating"
+                    (click)="openRottenTomatoes(movie.imdb.Title)">
+                    <ion-avatar>
+                      <img src="{{getRTIcon(rating)}}">
+                    </ion-avatar>
+                    <ion-label>{{rating}}</ion-label>
+                  </ion-chip>
+                  <ion-button size="small" color="tertiary" (click)="editMovie(movie.imdbID)" style="height:30px; margin:0">Editar</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab id="mainFab" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <p style="font-size: 20px">👌</p>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button [routerLink]="['/add-movie']" routerDirection="forward">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-label id="addMoviesLabel" [routerLink]="['/add-movie']" routerDirection="forward">Add Movies</ion-label>
+      <ion-fab-button (click)="listMovies()">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-label id="editListLabel" (click)="listMovies()">Edit List</ion-label>
+      <ion-fab-button [routerLink]="['/settings']" routerDirection="forward">
+        <ion-icon name="settings"></ion-icon>
+      </ion-fab-button>
+      <ion-label id="settingsLabel" [routerLink]="['/settings']" routerDirection="forward">Settings</ion-label>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

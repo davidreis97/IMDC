@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar style="max-height: 56px">
+    <ion-grid style="padding:0">
+      <ion-row>
+        <ion-col style="padding:0; display: flex;">
+          <ion-title>Ordena os filmes</ion-title>
+        </ion-col>
+        <ion-col style="padding:0; display: flex; justify-content: flex-end">
+          <ion-label>
+            <ion-icon style="margin-top:3px;font-size: 32px" name="trash"></ion-icon>
+          </ion-label>
+          <ion-toggle [(ngModel)]="delete" style="padding-left:0" color="danger"></ion-toggle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll="true">
+  <div *ngIf="!imdb.movies || imdb.movies.length == 0;" style="padding: 1em">
+    <img style="opacity: 0.7;padding: 4em 4em 1em 4em" src="/assets/images/no_movies.jpg">
+    <ion-text color="dark">
+      <h1 style="opacity: 0.7;text-align: center" *ngIf="vemDoTroll">
+        Vês? Vazio, tal como eu avisei.
+      </h1>
+      <h1 style="opacity: 0.7;text-align: center">
+        Volta lá para a página inicial para adicionar um filmito.
+      </h1>
+    </ion-text>
+  </div>
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
+      <div *ngFor="let movie of imdb.movies; index as i">
+        <ion-item *ngIf="movie.hasOwnProperty('imdb')">
+          <p style="padding-right: 1em;color: grey">#{{i+1}}</p>
+          <ion-label>{{movie.imdb.Title}}</ion-label>
+          <ion-button *ngIf="delete" color="danger" (click)="deleteItem(i)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+          <ion-reorder *ngIf="!delete"></ion-reorder>
+        </ion-item>
+        <ion-item *ngIf="!movie.hasOwnProperty('imdb')">
+          <ion-label>Loading movie... ({{movie.imdbID}})</ion-label>
+        </ion-item>
+      </div>
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid style="padding:0">
+      <ion-row>
+        <ion-col style="padding:0">
+          <ion-button color="danger" style="width:97%" (click)="cancel()">Cancelar</ion-button>
+        </ion-col>
+        <ion-col style="padding:0">
+          <ion-button color="success" style="width:97%" (click)="saveMovies()">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

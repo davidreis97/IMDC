@@ -1,0 +1,39 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+:root {
+
+  --card-background: var(--ion-background-color);
+  --chip-background: var(--ion-color-step-300);
+  --alert-color: var(--ion-color-light);
+
+  ion-alert {
+    --background: var(--alert-color);
+  }
+
+  ion-chip ion-label{
+    color: var(--ion-text-color);
+  }
+
+  ion-chip{
+    --background: var(--ion-color-step-150);
+  }
+
+  ion-card {
+    --background: var(--card-background);
+  }
+
+  ion-card ion-item{
+    --background: var(--card-background);
+  }
+
+  ion-card ion-list{
+    border-color: var(--card-background);
+    --background: var(--card-background);
+  }
+
+  ion-toggle{
+    --handle-background:white;
+  }
+}

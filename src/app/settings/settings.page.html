@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar style="max-height: 56px">
+      <ion-grid style="padding:0">
+        <ion-row>
+          <ion-col style="padding:0; display: flex;">
+            <ion-title>Definições ⚙️</ion-title>
+          </ion-col>
+          <ion-col style="padding:0; display: flex; justify-content: flex-end">
+            <ion-button (click)="imdb.setDefaults()">Ups Fiz 💩</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      <h2>Gerais 🛁</h2>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Dark Mode</ion-label>
+      <ion-toggle [(ngModel)]="imdb.darkMode"></ion-toggle>
+    </ion-item>
+    <ion-list-header>
+      <h2>Ligação 🌍</h2>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">Home Server Connection</ion-label>
+      <div style="display: flex;">
+        <ion-input placeholder="IP Address" [(ngModel)]="imdb.ipAddress"></ion-input>
+        <ion-input placeholder="Port" [(ngModel)]="imdb.port"></ion-input>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">OMDB API Key</ion-label>
+      <ion-input placeholder="API Key" [(ngModel)]="imdb.apiKey"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid style="padding:0">
+      <ion-row>
+        <ion-col style="padding:0">
+          <ion-button color="danger" style="width:97%" (click)="cancel()">Cancelar</ion-button>
+        </ion-col>
+        <ion-col style="padding:0">
+          <ion-button color="success" style="width:97%" (click)="save()">Guardar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

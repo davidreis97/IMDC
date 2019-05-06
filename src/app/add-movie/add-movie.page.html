@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Upa upa, filme novo...</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding overflow-scroll="true">
+  
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>ClaudsMeter 💃</ion-card-title>
+      <ion-card-subtitle>Já viste best, uma categoria só para ti? És mesmo especial.</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="claudsmeter">
+        <ion-button class="start-button" (click)="updateClaudsmeter('😡')" id="😡">😡</ion-button>
+        <ion-button (click)="updateClaudsmeter('🤦‍♀️')" id="🤦‍♀️">🤦‍♀️</ion-button>
+        <ion-button (click)="updateClaudsmeter('😅')" id="😅">😅</ion-button>
+        <ion-button (click)="updateClaudsmeter('😂')" id="😂">😂</ion-button>
+        <ion-button class="end-button" (click)="updateClaudsmeter('😍')" id="😍">😍</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="display: flex">
+    <ion-button color="success" width="100%" style="flex-grow:1; margin:1em" (click)="confirmMovie()">Concluido</ion-button>
+  </ion-card>
+
+
+</ion-content>
